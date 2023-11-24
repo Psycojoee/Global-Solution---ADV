@@ -1,0 +1,53 @@
+{
+  "usuarios": [
+    {
+      "id": "1",
+      "nome": "Thiago Marques",
+      "email": "thiago@fiap.com.br",
+      "senha": "1234",
+      "endereco": "a",
+      "data": "a",
+      "medicamentos": []
+    },
+    {
+      "id": "JUR6XaE",
+      "nome": "Maria Joaquina",
+      "email": "maria@fiap.com.br",
+      "senha": "4321",
+      "endereco": "Rua tal de tal",
+      "data": "20/10/2001",
+      "medicamentos": [
+        {
+          "id": "1",
+          "nome": "Medicamento Exemplo 1",
+          "horariosDeDosagem": "08:00, 14:00, 20:00",
+          "quantidade": "1 comprimido"
+        },
+        {
+          "id": "2",
+          "nome": "Medicamento Exemplo 2",
+          "horariosDeDosagem": "09:00, 21:00",
+          "quantidade": "2 comprimidos"
+        }
+      ]
+    },
+    {
+      "nome": "a",
+      "email": "a",
+      "senha": "a",
+      "endereco": "a",
+      "data": "a",
+      "medicamentos": [],
+      "id": "JFa4p7N"
+    },
+    {
+      "nome": "Thiago",
+      "email": "thiago@fiap.com",
+      "senha": "1234",
+      "endereco": "rua 123",
+      "data": "22/11/1997",
+      "medicamentos": [],
+      "id": "L5d7Y09"
+    }
+  ]
+}
