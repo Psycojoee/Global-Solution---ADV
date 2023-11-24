@@ -4,8 +4,8 @@ import axios from 'axios';
 import { styles } from '../style';
 import { MaterialIcons } from '@expo/vector-icons';
 
-const SignUp = ({ navigation }) => {
-  const [userDetails, setUserDetails] = useState({
+const SignUp = ({ navigation }) => { 
+  const [userDetails, setUserDetails] = useState({ // Estado para armazenar os detalhes do usuário a ser cadastrado
     nome: '',
     email: '',
     senha: '',
@@ -15,7 +15,7 @@ const SignUp = ({ navigation }) => {
   });
   const [erro, setErro] = useState("");
 
-  const handleInputChange = (field, value) => {
+  const handleInputChange = (field, value) => { // Função para manipular as mudanças de input, atualizando o estado userDetails
     setUserDetails({
       ...userDetails,
       [field]: value,
@@ -28,13 +28,13 @@ const SignUp = ({ navigation }) => {
       return;
     }
 
-    try {
+    try { // Envia os detalhes do usuário para o servidor para criar um novo usuário
       const response = await axios.post('http://localhost:3000/usuarios', userDetails);
       console.log(response.data);
       navigation.navigate('Home');
     } catch (error) {
       console.error(error);
-      setErro("Erro ao realizar o cadastro");
+      setErro("Erro ao realizar o cadastro"); // Atualiza o estado 'erro' com a mensagem de erro
     }
   };
 

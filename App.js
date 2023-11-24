@@ -6,9 +6,11 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { AuthProvider } from './context/AuthContext';
 import SignUp from './screens/signUp';
 
+// Importação do stack navigator do React Native Navigation
 const Stack = createNativeStackNavigator();
 
-export default function App() {
+// Definição do componente principal da aplicação
+export default function App() { 
   return (
     <NavigationContainer>
       <AuthProvider>

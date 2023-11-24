@@ -1,15 +1,15 @@
 import React from 'react';
 import { Image, Text, View, TouchableOpacity } from 'react-native';
-import { styles } from '../style'; // Certifique-se de que este caminho está correto para os seus estilos
+import { styles } from '../style'; // importando os estilos definidos no style.js
 
 export default function CardProduto({ produto }) {
     // Determina qual propriedade usar para o caminho da imagem
     const imagePath = produto.imagepath || produto.image;
 
-    return (
+    return ( 
         <View style={styles.pedidos}>
             <View style={styles.cardProduto}>
-                <Image style={styles.thumb} source={{ uri: imagePath }} />
+                <Image style={styles.thumb} source={{ uri: imagePath }} /> 
 
                 <View style={styles.produtoData}>
                     <Text>{produto.nome}</Text>

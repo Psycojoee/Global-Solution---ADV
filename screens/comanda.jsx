@@ -4,20 +4,22 @@ import { AuthContext } from '../context/AuthContext.js';
 import { MaterialIcons } from '@expo/vector-icons';
 import { styles } from '../style.js';
 
+// Define o componente Comanda e exporta como padrão
 export default function Comanda({ navigation }) {
     const { user } = useContext(AuthContext);
     const [medicamentos, setMedicamentos] = useState([]);
     const [erro, setErro] = useState("");
 
     const carregarMedicamentos = useCallback(async () => {
+        // Verifica se um usuário está logado e se tem um nome
         if (user && user.nome) {
             try {
-                const response = await fetch('http://localhost:3000/usuarios');
+                const response = await fetch('http://localhost:3000/usuarios'); // Aguarda a conversão da resposta para o formato JSON
                 const data = await response.json();
-                const listaUsuarios = Array.isArray(data) ? data : data.usuarios;
-                const usuarioEncontrado = listaUsuarios.find(u => u.nome === user.nome);
-                if (usuarioEncontrado && usuarioEncontrado.medicamentos) {
-                    setMedicamentos(usuarioEncontrado.medicamentos);
+                const listaUsuarios = Array.isArray(data) ? data : data.usuarios; // Verifica se a resposta é um array ou contém um campo 'usuarios', ajustando conforme o formato da resposta
+                const usuarioEncontrado = listaUsuarios.find(u => u.nome === user.nome); // Encontra o usuário atual na lista baseado no nome
+                if (usuarioEncontrado && usuarioEncontrado.medicamentos) { // Verifica se o usuário foi encontrado e se possui um campo 'medicamentos'
+                    setMedicamentos(usuarioEncontrado.medicamentos); // Atualiza o estado 'medicamentos' com os medicamentos do usuário
                 } else {
                     setErro("Usuário não encontrado ou sem medicamentos.");
                 }
@@ -28,14 +30,14 @@ export default function Comanda({ navigation }) {
         }
     }, [user]);
 
-    const excluirMedicamento = async (idMedicamento) => {
-        if (user && user.id) {
-            try {
+    const excluirMedicamento = async (idMedicamento) => { // Função assíncrona para excluir um medicamento especificado pelo seu ID
+        if (user && user.id) { // Verifica se existe um usuário logado e se tem um ID
+            try { // Faz uma requisição GET para obter dados do usuário pelo seu ID
                 const response = await fetch(`http://localhost:3000/usuarios/${user.id}`);
                 const usuario = await response.json();
                 const medicamentosAtualizados = usuario.medicamentos.filter(m => m.id !== idMedicamento);
                 
-                await fetch(`http://localhost:3000/usuarios/${user.id}`, {
+                await fetch(`http://localhost:3000/usuarios/${user.id}`, { // Faz uma requisição PUT para atualizar os dados do usuário com a nova lista de medicamentos
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
@@ -43,8 +45,8 @@ export default function Comanda({ navigation }) {
                     body: JSON.stringify({ ...usuario, medicamentos: medicamentosAtualizados }),
                 });
 
-                setMedicamentos(medicamentosAtualizados);
-            } catch (error) {
+                setMedicamentos(medicamentosAtualizados); // Atualiza o estado 'medicamentos' no componente com a nova lista de medicamentos
+            } catch (error) { // Em caso de erro na requisição, registra o erro no console e atualiza o estado 'erro' com detalhes do erro
                 console.error('Erro ao excluir medicamento:', error);
                 setErro("Erro ao excluir medicamento. Detalhes: " + error.message);
             }
